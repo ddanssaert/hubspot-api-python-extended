@@ -4,6 +4,40 @@ Python [HubSpot API](https://developers.hubspot.com/docs/api/overview) v3 SDK(Cl
 
 Sample Applications can be found in [Sample apps](https://github.com/HubSpot/sample-apps-list)
 
+## Extensions
+
+### OAuthClient
+The OAuthClient class automatically refresh tokens when a request fails because the access token is expired.
+
+Example usage:
+```python
+import os
+from pprint import pprint
+
+from hubspot import OAuthClient
+
+# Callback function to handle new tokens
+def access_token_setter(new_tokens: dict):
+    print('Retrieved new tokens:')
+    pprint(new_tokens)
+
+if __name__ == '__main__':
+    # Initialize the OAuthClient with necessary credentials
+    # OAuthClient extends Client to include automatic token management
+    # functionality for managing OAuth access tokens with refresh capability.
+    client = OAuthClient(
+        client_id=os.getenv('CLIENT_ID'),  # The client ID for OAuth
+        client_secret=os.getenv('CLIENT_SECRET'),  # The client secret for OAuth
+        access_token=os.getenv('ACCESS_TOKEN'),  # The access token used for API requests
+        refresh_token=os.getenv('REFRESH_TOKEN'),  # The refresh token to obtain a new access token
+        access_token_setter_callback=access_token_setter, # Optional callback to update new tokens (e.g., store them in a database)
+    )
+
+    # Example API call using the OAuthClient
+    response = client.crm.contacts.basic_api.get_page()
+    print(response)
+```
+
 ## Documentation
 
 See the [API docs](https://developers.hubspot.com/docs/api/overview).
