@@ -145,9 +145,7 @@ class OAuthClient(Client):
         def _autotokensrefresh_api_factory(api_client_package, api_name, config):
             configuration = api_client_package.Configuration()
             for key in config:
-                if key == "api_key":
-                    configuration.api_key["developer_hapikey"] = config["api_key"]
-                elif key == "retry":
+                if key == "retry":
                     configuration.retries = config["retry"]
                 else:
                     setattr(configuration, key, config[key])

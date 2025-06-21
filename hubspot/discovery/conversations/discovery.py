@@ -10,3 +10,8 @@ class Discovery(DiscoveryBase):
     def conversations(self):
         from .conversations.discovery import Discovery as ConversationsDiscovery
         return ConversationsDiscovery(self.config)
+
+    @property
+    def custom_channels(self):
+        from .custom_channels.discovery import Discovery as CustomChannelsDiscovery
+        return CustomChannelsDiscovery(self.config)
