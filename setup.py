@@ -14,7 +14,7 @@ from os.path import dirname, abspath, exists
 from setuptools import setup, find_packages  # noqa: H301
 
 
-NAME = "hubspot-api-client"
+NAME = "hubspot-api-client-extended"
 
 # To install the library, run the following
 #
